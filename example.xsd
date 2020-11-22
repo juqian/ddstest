@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:complexType name="DEVICE1_INIT">
+  <xs:sequence>
+     <xs:element name="width">
+       <xs:simpleType>
+         <xs:restriction base="xs:int"> 
+            <xs:minInclusive value="100"/>
+            <xs:maxInclusive value="200"/>
+           </xs:restriction>
+       </xs:simpleType>
+     </xs:element>
+     <xs:element name="length" type="xs:int"/> 
+     <xs:element name="area" type="xs:double"/>
+     <xs:element name="mode">
+	      <xs:simpleType>
+          <xs:restriction base="xs:int">
+            <xs:enumeration value="0"/>
+ 	          <xs:enumeration value="1"/>
+ 	       </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+	</xs:sequence>
+
+  <constraints>
+     <and name="shape_constraint">
+	      <constraint> <![CDATA[ value(*/length) > value(*/width) ]]> </constraint>
+	      <constraint> <![CDATA[ value(*/length) < 1500 ]]> </constraint>    
+     </and>
+  </constraints>
+
+  <calculation>
+    <calculator>
+	      <![CDATA[ value(*/area) = multiply(value(*/width), value(*/length) ) ]]>
+    </calculator>  
+	</calculation>
+</xs:complexType>
+
+</xs:schema>

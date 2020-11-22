@@ -1,0 +1,14 @@
+{
+		"name": "S20",
+		"description": "abnormal DDS topic settings in the device control process",
+		"event_sequence": "<i1: ZTCX> <i2: $x:controlled_dev[command]> <o3: $x:controlled_dev[response]>",		
+		"calculators":{
+      	 "t1": "value(i1[current]/time) = now()",
+      	 "t2": "value(i2[current]/time) = now()"
+  	},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "empty_topic"
+		}
+}

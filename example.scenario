@@ -1,0 +1,25 @@
+{  
+	"name": "device initialization check",
+	"event_sequence": "<i1: $x:dev[init ]> (<i2: $x:dev[query]> <o3: $x:dev[status]>){k}",
+	"sequence_constraints":{
+		"and":{  
+			"k_lower_bound": "k >= 1",
+			"k_upper_bound": "k <= 5"		
+		}
+	},
+	"data_constraints":{
+		"i2": {
+			"and":{
+				"i1_to_i2_time": "value(i2[current]/time) > value(i1[prev]/time)",
+				"i2_to_i2_time": "value(i2[current]/time) > value(i2[prev]/time)"	 
+			}
+  	}
+	},
+	"calculators":{
+      "sensor": "value(i2[current]/sensor) = select(\"sensor from %s where mode=\'%s\'\", type(i2[current]), value(i1[prev]/mode))"
+	},
+	"fault_pattern": { 
+		"position": "i1[first]/width", 
+		"fault": "overflow"
+	}
+}

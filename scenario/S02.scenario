@@ -1,0 +1,5 @@
+{
+		"name": "S02",
+		"description": "various ways of task model switch",
+		"event_sequence": "(<m1: AZC> | <m2: BZC> | <m3: CTC> | <m4: DKZ>) <m5: Login> (<m6: Info> | <m7: W> | <m8: Z>) <m9: OK>"
+}

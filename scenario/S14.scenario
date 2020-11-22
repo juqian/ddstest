@@ -1,0 +1,72 @@
+{
+		"name": "S14",
+		"description": "message duplicated in weapon launch",
+		"event_sequence": "<i1:$x:weapon[warm]> <t1:ti1> <i2: $x:weapon[prepare]> <t2:ti2> <i3: $x:weapon[launch]> <t3:ti2> <i4: $x:weapon[suspend]> <o5: $x: weapon[status], to>",
+		"data_constraints": 
+		{
+				"ti1": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti1)>6000",
+								"upper": "time(ti1)<8000"
+						}
+				},
+				"ti2": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti2)>3000",
+								"upper": "time(ti2)<5000"
+						}
+				},
+				"to": 
+				{
+						"&&": 
+						{
+								"lower": "time(to)>6000",
+								"upper": "time(to)<8000"
+						}
+				},
+				"i1": 
+				{
+						"warm": "value(i1[current]/order)=2"
+				},
+				"i2": 
+				{
+						"&&": 
+						{
+								"order": "value(i2[current]/order)=value(i1[prev]/order)*2",
+								"info": "value(i2[current]/info)=value(i1[prev]/info)",
+								"num": "value(i2[current]/num)=value(i1[prev]/num)"
+						}
+				},
+				"i3": 
+				{
+						"&&": 
+						{
+								"order": "value(i3[current]/order)=value(i2[prev]/order)*2",
+								"info": "value(i3[current]/info)=value(i2[prev]/info)",
+								"num": "value(i3[current]/num)=value(i2[prev]/num)"
+						}
+				},
+				"i4": 
+				{
+						"&&": 
+						{
+								"order": "value(i4[current]/order)=value(i3[prev]/order)*2",
+								"info": "value(i4[current]/info)=value(i3[prev]/info)",
+								"num": "value(i4[current]/num)=value(i3[prev]/num)"
+						}
+				},
+				"o5": 
+				{
+						"success": "value(o5[current]/status)=value(i4[prev]/order)+1"
+				}
+		},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "message_duplicated"
+		}
+}

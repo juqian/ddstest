@@ -1,0 +1,5 @@
+{
+		"name": "S08",
+		"description": "input messages with variable length data",
+		"event_sequence": "(<i1: $var_length>){k}"
+}

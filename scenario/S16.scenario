@@ -1,0 +1,10 @@
+{
+		"name": "S16",
+		"description": "data overflow in real-time target detection info.",
+		"event_sequence": "<i1: $detect_dev[realtime_info]>",
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "overflow"
+		}
+}

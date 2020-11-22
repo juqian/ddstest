@@ -1,0 +1,47 @@
+{
+		"name": "S22",
+		"description": "weapon equipment lost connection when querying status from weapon manager",
+		"event_sequence": "<o1:BJXX,to1> (<i1:ZCX> (<o2:BZT,to2> || <o3:BQCSL,to2>) <t1: ti>) {k}",
+		"sequence_constraints":{
+		   "and":{  
+              "k_lower_bound": "k >= 2",
+              "k_upper_bound": "k <= 3"		
+	       }		
+		},
+		"data_constraints": 
+		{
+				"to1": 
+				{
+						"&&": 
+						{
+								"lower": "time(to1)>=10000",
+								"upper": "time(to1)<=20000"
+						}
+				},
+				"to2": 
+				{
+						"&&": 
+						{
+								"lower": "time(to2)>3000",
+								"upper": "time(to2)<=5000"
+						}
+				},
+				"ti": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti)>3000",
+								"upper": "time(ti)<=5000"
+						}
+				},
+				"i1": 
+				{
+						"mask": "value(i1[current]/mask)=value(o1[prev]/mask)"
+				}
+		},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "interrupt[$weapon[disconnect]]"
+		}
+}

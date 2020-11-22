@@ -1,0 +1,5 @@
+{
+		"name": "S11",
+		"description": "input messages with complexly aligned data members",
+		"event_sequence": "<i1: $align>"
+}

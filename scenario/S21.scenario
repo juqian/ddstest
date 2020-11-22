@@ -1,0 +1,13 @@
+{
+		"name": "S21",
+		"description": "abnormal DDS domain settings in device control process",
+		"event_sequence": "<i1:$x:controlled_dev[command]> <o2: $x:controlled_dev[response]>",
+		"calculators":{
+      	"t1": "value(i1[current]/time) = now()"
+  	},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "wrong_domain"
+		}
+}

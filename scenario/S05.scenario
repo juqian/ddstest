@@ -1,0 +1,5 @@
+{
+		"name": "S05",
+		"description": "parallelly occurred target detection messages",
+		"event_sequence": "(<i1:$detect_dev[realtime_info]> || <i2:$detect_dev[realtime_info]>){//n}"
+}

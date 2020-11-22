@@ -1,0 +1,63 @@
+{
+		"name": "S01",
+		"description": "the launch and suspending of different weapons",
+		"event_sequence": "<i1:$x:weapon[warm]> <o2: $x:weapon[status],to> <i3: $x:weapon[prepare]> <o4: $x:weapon[status],to> <i5: $x:weapon[launch]> <o6: $x: weapon[status], to> <i7: $x:weapon[suspend]> < o8: $x: weapon[status], to>",
+		"data_constraints": 
+		{
+				"to": 
+				{
+						"&&": 
+						{
+								"lower": "time(to)>3000",
+								"upper": "time(to)<10000"
+						}
+				},
+				"i1": 
+				{
+						"warm": "value(i1[current]/order)=2"
+				},
+				"o2": 
+				{
+						"warmed": "value(o2[current]/status)=value(i1[prev]/order)+1"
+				},
+				"i3": 
+				{
+						"&&": 
+						{
+								"order": "value(i3[current]/order)=value(i1[prev]/order)*2",
+								"info": "value(i3[current]/info)=value(i1[prev]/info)",
+								"num": "value(i3[current]/num)=value(i1[prev]/num)"
+						}
+				},
+				"o4": 
+				{
+						"prepared": "value(o4[current]/status)=value(i3[prev]/order)+1"
+				},
+				"i5": 
+				{
+						"&&": 
+						{
+								"order": "value(i5[current]/order)=value(i3[prev]/order)*2",
+								"info": "value(i5[current]/info)=value(i3[prev]/info)",
+								"num": "value(i5[current]/num)=value(i3[prev]/num)"
+						}
+				},
+				"o6": 
+				{
+						"launched": "value(o6[current]/status)=value(i5[prev]/order)+1"
+				},
+				"i7": 
+				{
+						"&&": 
+						{
+								"order": "value(i7[current]/order)=value(i5[prev]/order)*2",
+								"info": "value(i7[current]/info)=value(i5[prev]/info)",
+								"num": "value(i7[current]/num)=value(i5[prev]/num)"
+						}
+				},
+				"o8": 
+				{
+						"suspended": "value(o8[current]/status)=value(i7[prev]/order)+1"
+				}
+		}
+}

@@ -1,0 +1,5 @@
+{
+		"name": "S10",
+		"description": "input messages with float or double type data members",
+		"event_sequence": "<i1: $float> | <i2: $double>"
+}

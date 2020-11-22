@@ -1,0 +1,33 @@
+{
+		"name": "S23",
+		"description": "device crash and then recover from the crash",
+		"event_sequence": "(<i1:$x:controlled_dev[command]> <o2: $x:controlled_dev[response], to>){k}",
+		"sequence_constraints": 
+		{
+				"and": 
+				{
+						"k_lower_bound": "k >= 2",
+						"k_upper_bound": "k <= 3"
+				}
+		},
+		"data_constraints": 
+		{
+				"to": 
+				{
+						"&&": 
+						{
+								"lower": "time(to)>5000",
+								"upper": "time(to)<10000"
+						}
+				}
+		},
+		"calculators": 
+		{
+				"now": "value(i1[current]/time) = now()"
+		},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "interrupt[$x:controlled_dev[reboot]]"
+		}
+}

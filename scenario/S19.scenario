@@ -1,0 +1,32 @@
+{
+		"name": "S19",
+		"description": "inter-event constraints unsatisfied in periodical target detection info.",
+		"event_sequence": "(<i1:$x:detect_dev[period_info]> <t1: $period>){n}",
+		"data_constraints": 
+		{
+				"$period": 
+				{
+						"&&": 
+						{
+								"lower": "time($period)>1000",
+								"upper": "time($period)<=2000"
+						}
+				},
+				"i1": 
+				{
+						"&&": 
+						{
+								"lower": "value(i1[current]/time)>0",
+								"upper": "value(i1[current]/time)>value(i1[prev]/time)"
+						}
+				}
+		},		
+		"calculators":{
+	  		"now": "value(i1[first]/time) = now()"
+		},
+		"fault_pattern": 
+		{
+	  		"position": "any[any]",
+	  		"fault": "constraint_violated[inter]"
+		}
+}

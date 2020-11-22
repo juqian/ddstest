@@ -1,0 +1,103 @@
+{
+		"name": "S03",
+		"description": "weapon type switch in a launch process",
+		"event_sequence": "<i1: $w1:weapon[load_query]> <o1: $w1:weapon[load_info], to1, > <i2: $w1:weapon[warm]> <o2: $w1:weapon[status], to2, > <t1: ti1> <i3: $w1:weapon[prepare]> <o3: $w1:weapon[status], to2, > <t2: ti2> <i4: $w1:weapon[suspend]> <o4: $w1:weapon[status], to2, > <t3: ti2> <i5: $w2:weapon[load_query]> <o5: $w2:weapon[load_info], to1, > <t4: ti3> <i6: $w2:weapon[warm]> <o6: $w2:weapon[status], to2, > <t5: ti2> <i7: $w2:weapon[prepare]> <o7: $w2:weapon[status], to2, >",
+		"data_constraints": 
+		{
+				"to1": 
+				{
+						"&&": 
+						{
+								"lower": "time(to1)>=2000",
+								"upper": "time(to1)<3500"
+						}
+				},
+				"to2": 
+				{
+						"&&": 
+						{
+								"lower": "time(to2)>=7000",
+								"upper": "time(to2)<8000"
+						}
+				},
+				"ti1": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti1)>=7000",
+								"upper": "time(ti1)<8000"
+						}
+				},
+				"ti2": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti2)>=2000",
+								"upper": "time(ti2)<3500"
+						}
+				},
+				"ti3": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti3)>9000",
+								"upper": "time(ti3)<11000"
+						}
+				},
+				"i2": 
+				{
+						"&&": 
+						{
+								"order": "value(i2[current]/order)=2",
+								"info": "value(i2[current]/info)=value(o1[prev]/info)",
+								"num": "value(i2[current]/num)=value(o1[prev]/num)",
+								"retain": "value(i2[current]/retain)=0"
+						}
+				},
+				"o2": "value(o2[current]/state)=value(i2[prev]/order)+1",
+				"i3": 
+				{
+						"&&": 
+						{
+								"order": "value(i3[current]/order)=value(i2[prev]/order)*2",
+								"info": "value(i3[current]/info)=value(i2[prev]/info)",
+								"num": "value(i3[current]/num)=value(i2[prev]/num)",
+								"retain": "value(i3[current]/retain)=0"
+						}
+				},
+				"o3": "value(o3[current]/state)=value(i3[prev]/order)+1",
+				"i4": 
+				{
+						"&&": 
+						{
+								"order": "value(i4[current]/order)=value(i3[prev]/order)*4",
+								"info": "value(i4[current]/info)=value(i3[prev]/info)",
+								"num": "value(i4[current]/num)=value(i3[prev]/num)",
+								"retain": "value(i4[current]/retain)=-1"
+						}
+				},
+				"o4": "value(o4[current]/state)=value(i4[prev]/order)+1",
+				"i6": 
+				{
+						"&&": 
+						{
+								"order": "value(i6[current]/order)=2",
+								"info": "value(i6[current]/info)=value(o5[prev]/info)",
+								"num": "value(i6[current]/num)=value(o5[prev]/num)",
+								"retain": "value(i6[current]/retain)=-1"
+						}
+				},
+				"o6": "value(o6[current]/state)=value(i6[prev]/order)+1",
+				"i7": 
+				{
+						"&&": 
+						{
+								"order": "value(i7[current]/order)=value(i6[prev]/order)*2",
+								"info": "value(i7[current]/info)=value(i6[prev]/info)",
+								"num": "value(i7[current]/num)=value(i6[prev]/num)",
+								"retain": "value(i7[current]/retain)=-1"
+						}
+				},
+				"o7": "value(o7[current]/state)=value(i7[prev]/order)+1"
+		}
+}

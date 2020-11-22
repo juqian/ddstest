@@ -1,0 +1,21 @@
+{
+		"name": "S18",
+		"description": "input messages with intra-event constraints unsatisfied",
+		"event_sequence": "(<i1: $x:constrainted><t1: ti>){k}",
+		"data_constraints": 
+		{
+				"ti": 
+				{
+						"&&": 
+						{
+								"lower": "time(ti)>1000",
+								"upper": "time(ti)<=2000"
+						}
+				}
+		},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "constraint_violated"
+		}
+}

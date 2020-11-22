@@ -1,0 +1,16 @@
+{
+		"name": "S04",
+		"description": "sequentially occurred target detection messages",
+		"event_sequence": "(<i1:$detect_dev[realtime_info]> | (<i2:$detect_dev[period_info]><t1:period>)){n}",
+		"data_constraints": 
+		{
+				"period": 
+				{
+						"&&": 
+						{
+								"lower": "time(period)>500",
+								"upper": "time(period)<=2000"
+						}
+				}
+		}
+}

@@ -1,0 +1,5 @@
+{
+		"name": "S09",
+		"description": "input messages with complex nested data types",
+		"event_sequence": "<i1: $nested>"
+}

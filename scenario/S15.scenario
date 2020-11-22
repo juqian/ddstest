@@ -1,0 +1,28 @@
+{
+		"name": "S15",
+		"description": "bad period time for periodical target detection info.",
+		"event_sequence": "(<i1:$x:detect_dev[period_info]> <t1: $period>){n}",
+		"data_constraints": 
+		{
+				"$period": 
+				{
+						"&&": 
+						{
+								"lower": "time($period)>1000",
+								"upper": "time($period)<10000"
+						}
+				},
+				"i1": 
+				{
+						"time": "value(i1[current]/time)>value(i1[prev]/time)"
+				}
+		},		
+		"calculators":{
+	       "now": "value(i1[first]/time) = now()"
+  	},
+		"fault_pattern": 
+		{
+				"position": "any[any]",
+				"fault": "time_out_of_boundary"
+		}
+}

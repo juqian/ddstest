@@ -1,0 +1,5 @@
+{
+		"name": "S07",
+		"description": "input messages with big data blocks",
+		"event_sequence": "<i1: $big_block>"
+}
